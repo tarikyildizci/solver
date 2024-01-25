@@ -3,6 +3,7 @@ import { Metadata } from "next"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
+import { simplex } from "@/lib/simplex"
 import { cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
@@ -30,6 +31,16 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  const objectiveFunction = [60, 30, 20]
+  const constraints = [
+    [8, 6, 1],
+    [4, 2, 1.5],
+    [2, 1.5, 0.5],
+    [0, 1, 0],
+  ]
+  const rhs = [48, 20, 8, 5]
+
+  console.log(simplex(objectiveFunction, constraints, rhs))
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -43,7 +54,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
-              <div className="flex-1">{children}</div>
+              {children}
             </div>
             <TailwindIndicator />
           </ThemeProvider>
