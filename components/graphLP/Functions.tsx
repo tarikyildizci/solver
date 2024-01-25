@@ -7,7 +7,7 @@ export interface FunctionPlotProps {
   options?: FunctionPlotOptions
 }
 
-export const FunctionPlot: React.FC<FunctionPlotProps> = React.memo(
+const FunctionPlot: React.FC<FunctionPlotProps> = React.memo(
   ({ options }) => {
     const rootEl = useRef(null)
 
@@ -21,3 +21,7 @@ export const FunctionPlot: React.FC<FunctionPlotProps> = React.memo(
   },
   () => false
 )
+
+FunctionPlot.displayName = "FunctionPlot"
+
+export { FunctionPlot }
