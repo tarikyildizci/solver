@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export default function IndexPage() {
   return (
-    <main className="container grow flex flex-col items-center pt-24 gap-4">
+    <main className="flex flex-col items-center pt-24 gap-4">
       <div className="h-96 w-96 absolute bottom-0 -left-20 bg-gradient-to-br rounded-md bg-amber-500 blur-3xl opacity-40 animate-blob-move" />
       <div className="h-96 w-64 absolute top-0 -right-24 bg-gradient-to-br rounded-md bg-blue-500 blur-3xl opacity-20 animate-blob-move" />
       <section className="p-12 w-full flex justify-center items-center">

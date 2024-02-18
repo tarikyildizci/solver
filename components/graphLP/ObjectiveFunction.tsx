@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
 
+import { SolverCard } from "../common"
 import {
   FormControl,
   FormDescription,
@@ -23,9 +24,11 @@ import {
 import { Textarea } from "../ui/textarea"
 import { FormInputs } from "./Provider"
 
-export type ObjectiveFunctionProps = {}
+export type ObjectiveFunctionProps = { className?: string }
 
-export const ObjectiveFunction: React.FC<ObjectiveFunctionProps> = () => {
+export const ObjectiveFunction: React.FC<ObjectiveFunctionProps> = ({
+  className,
+}) => {
   const { control, setValue, watch } = useFormContext<FormInputs>()
 
   const parsedTerms = watch("objectiveFunction.items")
@@ -52,8 +55,7 @@ export const ObjectiveFunction: React.FC<ObjectiveFunctionProps> = () => {
   }
 
   return (
-    <section className="p-4 flex flex-col gap-2 border rounded-md shadow-sm">
-      <h1 className={cn("text-xl font-semibold")}>Objective Function</h1>
+    <SolverCard title="Objective Function" className={cn(className)}>
       <FormField
         render={({ field: { onChange, value, ...rest } }) => (
           <FormItem>
@@ -68,8 +70,8 @@ export const ObjectiveFunction: React.FC<ObjectiveFunctionProps> = () => {
             </FormControl>
             <FormDescription>
               Write your objective function in the following format: 4x - 6y +
-              6. <i>x</i> is the first variable and <i>y</i> is the second
-              variable. You can use the plus (+) and minus (-) operators.
+              6. You can use the plus (+) and minus (-) operators. Variables
+              must have a coefficient (<i>1x instead of x</i>).
             </FormDescription>
           </FormItem>
         )}
@@ -100,9 +102,12 @@ export const ObjectiveFunction: React.FC<ObjectiveFunctionProps> = () => {
           control={control}
         />
         {parsedTerms?.map(
-          (term) =>
+          (term, idx) =>
             !isNaN(term.coefficient) && (
-              <div className="border bg-muted px-2 py-1 h-fit flex items-center rounded-md text-sm">
+              <div
+                key={idx}
+                className="border bg-muted px-2 py-1 h-fit flex items-center rounded-md text-sm"
+              >
                 {term.coefficient > 0
                   ? "+" + term.coefficient
                   : term.coefficient}
@@ -111,6 +116,6 @@ export const ObjectiveFunction: React.FC<ObjectiveFunctionProps> = () => {
             )
         )}
       </div>
-    </section>
+    </SolverCard>
   )
 }

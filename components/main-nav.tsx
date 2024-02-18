@@ -17,14 +17,16 @@ export function MainNav({ items }: MainNavProps) {
   const pathname = usePathname()
 
   return (
-    <div className="flex gap-6 md:gap-10">
+    <div className="flex gap-6 md:gap-10 ">
       <div className="flex items-center space-x-2">
         <Link href={"https://tarikyildizci.com"}>
           <span className="text-sm font-medium ">tarikyildizci </span>{" "}
         </Link>
         <span>/</span>
-        <Icons.logo className="h-6 w-6" />
-        <span className="inline-block font-bold">{siteConfig.name}</span>
+        <Link href={"/"} className="flex items-center space-x-2">
+          <Icons.logo className="h-6 w-6" />
+          <span className="inline-block font-bold">{siteConfig.name}</span>
+        </Link>
       </div>
       {items?.length ? (
         <nav className="flex gap-6">

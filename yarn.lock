@@ -1273,11 +1273,6 @@ chownr@^1.1.1:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
 
-clamp@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/clamp/-/clamp-1.0.1.tgz#66a0e64011816e37196828fdc8c8c147312c8634"
-  integrity sha512-kgMuFyE78OC6Dyu3Dy7vcx4uy97EIbVxJB/B0eJ3bUNAkwdNcxYzgKltnyADiYwsR7SEqkkUPsEUT//OVS6XMA==
-
 class-variance-authority@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/class-variance-authority/-/class-variance-authority-0.4.0.tgz#2ff1b5a836a68ce7a2dac0cc12f6fdc50e47f666"
@@ -1896,6 +1891,11 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
+events@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
+
 expand-template@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/expand-template/-/expand-template-2.0.3.tgz#6e14b3fcee0f3a6340ecb57d2e8918692052a47c"
@@ -2006,13 +2006,12 @@ function-bind@^1.1.1:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
-function-plot@^1.23.3:
-  version "1.23.3"
-  resolved "https://registry.yarnpkg.com/function-plot/-/function-plot-1.23.3.tgz#a17f953a7563b591da8799ff09fdcde1876b13cf"
-  integrity sha512-YvV517ZNrc93SBlLux3LfNZUEil7DiZGHerKGk5tU/iqIzFYedyw3u7ZeAcrll3qzhKTs84M8XxUiESE7Mlzdw==
+function-plot@^1.24.4:
+  version "1.24.4"
+  resolved "https://registry.yarnpkg.com/function-plot/-/function-plot-1.24.4.tgz#006c58c44daf7f25f91b86e8d78256a59ab0ab5e"
+  integrity sha512-qlAfK6AENICh0HWiwx6h0aIAq/l/4YYNxConi89Bs7w4W+Jj5t548U6bPRbNR667N0hBLCSYOyYE2VsmRrflGg==
   dependencies:
     built-in-math-eval "^0.3.0"
-    clamp "^1.0.1"
     d3-axis "^3.0.0"
     d3-color "^3.1.0"
     d3-format "^3.1.0"
@@ -2021,6 +2020,7 @@ function-plot@^1.23.3:
     d3-selection "^3.0.0"
     d3-shape "^3.1.0"
     d3-zoom "^3.0.0"
+    events "^3.3.0"
     interval-arithmetic-eval "^0.5.1"
 
 function.prototype.name@^1.1.5:
@@ -2037,6 +2037,11 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
+
+geist@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/geist/-/geist-1.2.2.tgz#6e0c70afb7a99efaa403368b4935c62650619a06"
+  integrity sha512-uRDrxhvdnPwWJmh+K5+/5LXSKwvJzaYCl9tDXgiBi4hj7hB4K7+n/WLcvJMFs5btvyn0r9OSwCd1s6CmqAsxEw==
 
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"

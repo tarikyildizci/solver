@@ -1,12 +1,30 @@
 "use client"
 
-import React from "react"
-import { PlusCircle } from "lucide-react"
+import React, { PropsWithChildren } from "react"
+import { Delete, PlusCircle, Trash2 } from "lucide-react"
 import { useFieldArray, useFormContext } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
 
+import { SolverCard } from "../common"
 import { Button } from "../ui/button"
+import { FormField, FormItem } from "../ui/form"
+import { Input } from "../ui/input"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table"
 import { FormInputs } from "./Provider"
 
 export type ConstraintsProps = {
@@ -19,79 +37,110 @@ export const Constraints: React.FC<ConstraintsProps> = ({ className }) => {
   const watchXName = watch("xName") ?? "X"
   const watchYName = watch("yName") ?? "Y"
 
-  const { fields: constraints, append } = useFieldArray({
+  const {
+    fields: constraints,
+    append,
+    remove,
+  } = useFieldArray({
     name: "constraints",
     control,
   })
 
   return (
-    <section
-      className={cn(
-        "md:col-span-2 p-4 flex flex-col gap-2 border rounded-md shadow-sm",
-        className
-      )}
-    >
-      <h1 className="text-xl font-semibold">Constraints</h1>
-      <div className="flex flex-col border rounded-md overflow-hidden">
-        <div className="grid grid-cols-4 border-b font-semibold">
-          <div className="border-r px-4 py-2">{watchXName}</div>
-          <div className="border-r px-4 py-2">{watchYName}</div>
-          <div className="border-r px-4 py-2">Operator</div>
-          <div className="px-4 py-2">RHS</div>
-        </div>
-        {constraints.length === 0 && (
-          <div className="w-full flex items-center border-b px-8 py-8">
-            No constraints added.
-          </div>
-        )}
-        {constraints.map((constraint, index) => (
-          <Row key={constraint.id} {...constraint} index={index} />
-        ))}
+    <SolverCard
+      title={`Constraints (${constraints.length})`}
+      className={cn(className)}
+      titleExtra={
         <Button
-          variant={"secondary"}
-          className="rounded-none border-0 border-b last:border-b-0"
-          onClick={() => {
-            append({ x: 20, y: 43, operator: "<=", rhs: 12 })
-          }}
+          type="button"
+          onClick={() => append({ x: "1", y: "1", operator: "<=", rhs: "1" })}
+          size={"sm"}
+          className="w-fit"
+          variant={"outline"}
         >
-          <PlusCircle className="h-4 w-4 mr-4 text-foreground" />
-          <p>Add Constraint</p>
+          Add Constraint <PlusCircle className="h-4 w-4 mx-2" />
         </Button>
-      </div>
-    </section>
+      }
+    >
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>{watchXName}</TableHead>
+            <TableHead>{watchYName}</TableHead>
+            <TableHead>Operator</TableHead>
+            <TableHead>RHS</TableHead>
+            <TableHead>Action</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {constraints.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center">
+                No constraints added.
+              </TableCell>
+            </TableRow>
+          )}
+          {constraints.map((constraint, index) => (
+            <Row
+              key={constraint.id}
+              index={index}
+              onRemove={() => remove(index)}
+            />
+          ))}
+        </TableBody>
+      </Table>
+    </SolverCard>
   )
 }
 
 const Row: React.FC<{
-  x: number
-  y: number
-  operator: FormInputs["constraints"][0]["operator"]
-  rhs: number
   index: number
-}> = ({ operator, rhs, x, y, index }) => {
+  onRemove: () => void
+}> = ({ index, onRemove }) => {
   const { control, watch, register } = useFormContext<FormInputs>()
 
   return (
-    <div className="grid grid-cols-4 border-b last:border-b-0">
-      <input
-        className="clear border-r px-4 py-2"
-        {...register(`constraints.${index}.x`)}
-      />
-      <input
-        className="clear border-r px-4 py-2"
-        {...register(`constraints.${index}.y`)}
-      />
-      <select
-        className="clear border-r px-4 py-2"
-        {...register(`constraints.${index}.operator`)}
-      >
-        <option value="<=">{"<="}</option>
-        <option value=">=">{">="}</option>
-      </select>
-      <input
-        className="clear  px-4 py-2"
-        {...register(`constraints.${index}.rhs`)}
-      />
-    </div>
+    <TableRow>
+      <ConstraintCell>
+        <Input type="number" {...register(`constraints.${index}.x`)} />
+      </ConstraintCell>
+      <ConstraintCell>
+        <Input type="number" {...register(`constraints.${index}.y`)} />
+      </ConstraintCell>
+      <ConstraintCell>
+        <FormField
+          name={`constraints.${index}.operator`}
+          control={control}
+          render={({ field }) => (
+            <Select
+              onValueChange={(val) =>
+                field.onChange({ target: { value: val } })
+              }
+              value={field.value}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="<=">{"<="}</SelectItem>
+                <SelectItem value=">=">{">="}</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
+      </ConstraintCell>
+      <ConstraintCell>
+        <Input type="number" {...register(`constraints.${index}.rhs`)} />
+      </ConstraintCell>
+      <ConstraintCell>
+        <Button variant={"outline"} size={"icon"} onClick={onRemove}>
+          <Trash2 className="h-4 w-4 text-destructive" />
+        </Button>
+      </ConstraintCell>
+    </TableRow>
   )
+}
+
+const ConstraintCell: React.FC<PropsWithChildren> = ({ children }) => {
+  return <TableCell className="p-3">{children}</TableCell>
 }

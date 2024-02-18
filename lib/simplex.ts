@@ -9,21 +9,43 @@ export const simplex = (
     convertObjectiveFunctionToStandardForm(objectiveFunction)
 
   const matrix = createMatrix(standardObjectiveFunction, constraints, rhs)
+  const basicVariables: Array<string> = []
+
+  matrix.forEach((_row, index) => {
+    basicVariables.push(index === 0 ? "Z" : `s${index}`)
+  })
+
+  console.log("Initial matrix:")
+  console.table(
+    [...matrix].map((row, index) => [...row, basicVariables[index]])
+  )
 
   let numberOfTrialsBeforeEnding = 1000
   while (
     !isBasicFeasibleSolutionOptimal(matrix) &&
     numberOfTrialsBeforeEnding > 0
   ) {
+    console.table(matrix)
+    console.table(basicVariables)
     // get entering variable column
     const enteringVariableColumn = getEnteringVariable(matrix)
     // get exit variable row
     const exitVariableRow = getExitVariable(matrix, enteringVariableColumn)
+
+    // update basic variables
+    const newBasicVariableName = getBasicVariableNameFromColumnIndex(
+      enteringVariableColumn,
+      2
+    )
+
+    basicVariables[exitVariableRow] = newBasicVariableName
+
     // update matrix
     pivot(matrix, exitVariableRow, enteringVariableColumn)
     basicFeasibleSolutions.push(matrix[0][matrix[0].length - 1])
     numberOfTrialsBeforeEnding--
   }
+  console.log("Number of trials before ending", numberOfTrialsBeforeEnding)
   return matrix
 }
 
@@ -43,8 +65,12 @@ const getExitVariable = (
   )
   const ratios = rhsColumn.map((rhs, index) => {
     if (index === 0) return Infinity
+
     if (enteringVariableColumn[index] < 0) return Infinity
-    return rhs / enteringVariableColumn[index]
+
+    const ratio = rhs / enteringVariableColumn[index]
+
+    return isNaN(ratio) ? Infinity : ratio
   })
 
   return ratios.indexOf(Math.min(...ratios))
@@ -127,3 +153,11 @@ const constraints: Constraints = [
   [0, 1, 0],
 ]
 const rhs: RHS = [48, 20, 8, 5]
+
+const getBasicVariableNameFromColumnIndex = (
+  index: number,
+  decisionVariables: number
+) => {
+  if (index + 1 <= decisionVariables) return `x${index + 1}`
+  return `s${index - decisionVariables}`
+}

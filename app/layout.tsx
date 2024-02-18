@@ -1,5 +1,7 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
+import { GeistMono } from "geist/font/mono"
+import { GeistSans } from "geist/font/sans"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -47,12 +49,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
+            "min-h-screen bg-background antialiased tabular-nums ",
+            GeistMono.className
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <div className="flex flex-col">
               <SiteHeader />
               {children}
             </div>

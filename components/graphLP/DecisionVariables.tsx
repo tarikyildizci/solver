@@ -5,6 +5,7 @@ import { useForm, useFormContext } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
 
+import { SolverCard } from "../common"
 import { Checkbox } from "../ui/checkbox"
 import {
   Form,
@@ -25,14 +26,8 @@ export const DecisionVariables: React.FC<DecisionVariablesProps> = ({
 }) => {
   const { control } = useFormContext<FormInputs>()
   return (
-    <section
-      className={cn(
-        "p-4 flex flex-col gap-2 border rounded-md shadow-sm",
-        className
-      )}
-    >
-      <h1 className="text-xl font-semibold">Decision Variables</h1>
-      <div className="flex flex-wrap gap-2 w-full">
+    <SolverCard title="1. Decision Variables" className={cn(className)}>
+      <div className="flex gap-4">
         <FormField
           name="xName"
           control={control}
@@ -49,30 +44,6 @@ export const DecisionVariables: React.FC<DecisionVariablesProps> = ({
             </FormItem>
           )}
         />
-        {/* <FormField
-        name="xPositive"
-        control={control}
-        render={({ field: { value, onChange, ...field } }) => (
-          <FormItem>
-            <FormControl>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  {...field}
-                  checked={value}
-                  onCheckedChange={onChange}
-                />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  X must be positive
-                </label>
-              </div>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      /> */}
 
         <FormField
           name="yName"
@@ -91,6 +62,6 @@ export const DecisionVariables: React.FC<DecisionVariablesProps> = ({
           )}
         />
       </div>
-    </section>
+    </SolverCard>
   )
 }
