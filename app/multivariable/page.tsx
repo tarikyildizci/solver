@@ -33,12 +33,13 @@ const Page: React.FC = () => {
 
   return (
     <section className="container grid grid-cols-2  gap-6 pb-8 pt-6 md:py-10">
-      <DecisionVariables />
+      {/* <DecisionVariables />
       <ObjectiveFunction
         objectiveFunctionConfig={watch("objectiveFunction")}
         setObjectiveFunctionConfig={setObjectiveFunctionConfig}
       />
-      <Constraints />
+      <Constraints /> */}
+      This page is still a work in progress.
     </section>
   )
 }

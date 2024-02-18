@@ -2,8 +2,7 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
   name: "Solver",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+  description: "Graphical Linear Programming solver.",
   mainNav: [
     {
       title: "Graphical",
@@ -15,6 +14,6 @@ export const siteConfig = {
     },
   ],
   links: {
-    github: "https://github.com/shadcn/ui",
+    github: "https://github.com/tarikyildizci/solver",
   },
 }

@@ -26,8 +26,13 @@ export default function IndexPage() {
         <Link href={"/graphical"}>
           <Button variant={"outline"}>Two Variable (Graphical)</Button>
         </Link>
-        <Link href={"/multivariable"}>
-          <Button>Multi-Variable</Button>
+        <Link
+          href={
+            "/"
+            // "/multivariable"
+          }
+        >
+          <Button disabled>Multi-Variable (WIP)</Button>
         </Link>
       </section>
     </main>

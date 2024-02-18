@@ -12,6 +12,9 @@ export function SiteHeader() {
       <div className="px-4 flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
+          <span className="text-xs text-gray-500 dark:text-gray-400">
+            v{process.env.npm_package_version}
+          </span>
           <nav className="flex items-center space-x-1">
             <Link
               href={siteConfig.links.github}
@@ -28,7 +31,7 @@ export function SiteHeader() {
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </nav>
         </div>
       </div>

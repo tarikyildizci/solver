@@ -49,11 +49,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background antialiased tabular-nums ",
+            "min-h-screen bg-background antialiased tabular-nums",
             GeistMono.className
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <div className="flex flex-col">
               <SiteHeader />
               {children}
